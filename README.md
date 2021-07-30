@@ -1,35 +1,14 @@
 # pomors
-[![Actions Status](https://github.com/yuizho/pomors/workflows/build/badge.svg)](https://github.com/yuizho/pomors/actions)
-[![crate-name at crates.io](https://img.shields.io/crates/v/pomors.svg)](https://crates.io/crates/pomors)
+##### 功能上的区别
 
-A simple CLI pomodoro timer for Mac and Linux 🍅
+* 限定了番茄总数, 而不是无限循环(原项目是无限循环, 直到按q退出). 因此增加了总番茄数选项. 而且从指定秒数变成了指定分钟. 还增加了几个番茄对应一个长休息的选项. 具体增加的选项, 见Option的定义.
+* 去掉了番茄和休息结束后的确认继续. 不再在终端打印询问信息, 直接继续.
+* 时钟的显示信息, 多了总番茄数(因为原来没有这个逻辑).
+* 所有番茄结束后增加通知信息`All done`
+* 去掉声音播放
+* 不每秒显示, 每10秒刷新时间的显示. 用sleep而不是spin_sleep
 
-<img src="pomors.gif" width="600">
+##### refactor
 
-# Getting Started
-If you haven't installed cargo, follow the procedure below to install it.
+合并`flush_work_timer`和`flush_break_timer`为`flush_timer`
 
-https://doc.rust-lang.org/cargo/getting-started/installation.html
-
-```
-$ cargo install pomors
-$ pomors
-```
-
-## Usage
-```
-USAGE:
-    pomors [OPTIONS]
-
-FLAGS:
-    -h, --help       Prints help information
-    -V, --version    Prints version information
-
-OPTIONS:
-    -l, --long-break-sec <long_break_sec>       [default: 1200]
-    -s, --short-break-sec <short_break_sec>     [default: 300]
-    -w, --work-sec <work_sec>                   [default: 1500]
-```
-
-## License
-MIT
